@@ -83,9 +83,9 @@ module Oauth
 
           def build_user_from_token
           end
-          
+
           def credentials
-            @credentials||=OAUTH_CREDENTIALS[service_name]
+            @credentials ||= OAUTH_CREDENTIALS[service_name]
           end
 
         end
@@ -95,11 +95,11 @@ module Oauth
           # Main client for interfacing with remote service. Override this to use
           # preexisting library eg. Twitter gem.
           def client
-            @client||=OAuth::AccessToken.new self.class.consumer,token,secret
+            @client||=OAuth::AccessToken.new(self.class.consumer, token, secret)
           end
 
           def simple_client
-            @simple_client||=SimpleClient.new client
+            @simple_client ||= SimpleClient.new(client)
           end
 
           # Override this to return user data from service
