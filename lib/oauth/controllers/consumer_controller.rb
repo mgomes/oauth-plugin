@@ -139,8 +139,8 @@ module Oauth
       def load_consumer
         throw RecordNotFound unless OAUTH_CREDENTIALS.include?(consumer_key)
         deny_access! unless logged_in? || consumer_credentials[:allow_login]
-        @consumer="#{consumer_key.to_s.camelcase}Token".constantize
-        @token=@consumer.find(:first, :conditions=>{:user_id=>current_user.id.to_s}) if logged_in?
+        @consumer = "#{consumer_key.to_s.camelcase}Token".constantize
+        @token = @consumer.where(user_id: current_user.id.to_s).first
       end
 
       # Override this in you controller to deny user or redirect to login screen.
